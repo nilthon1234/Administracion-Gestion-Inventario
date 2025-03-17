@@ -3,8 +3,11 @@ package com.gestion.today.persistence.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,6 +23,9 @@ public class LittleGirl {
     private String codToday;
     private int amount;
     private String image;
+
+    @Column(name = "cod_Company", unique = true)
+    private String company;
 
     private int eu28;
     private int eu28_5;
@@ -53,4 +59,13 @@ public class LittleGirl {
 
     private int eu38;
     private int eu38_5;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "registration_date", updatable = false)
+    private Date registrationDate;
+
+    @PrePersist
+    protected void onCreate(){
+        registrationDate = new Date();
+    }
 }

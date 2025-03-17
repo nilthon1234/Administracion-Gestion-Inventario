@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +24,8 @@ public class Baby {
     private String codToday;
     private int amount;
     private String image;
+    @Column(name = "cod_Company")
+    private String company;
 
     private int eu18;
     private int eu18_5;
@@ -52,5 +57,13 @@ public class Baby {
     private int eu27;
     private int eu27_5;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "registration_date", updatable = false)
+    private Date registrationDate;
+
+    @PrePersist
+    protected void onCreate(){
+        registrationDate = new Date();
+    }
 
 }

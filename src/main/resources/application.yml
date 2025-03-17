@@ -16,3 +16,5 @@ spring:
     show-sql: true
 
 
+project:
+  poster: QR/
