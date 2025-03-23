@@ -4,6 +4,7 @@ import com.gestion.today.persistence.models.SlipperType;
 import com.gestion.today.presentation.dto.SlipperDTO;
 import com.gestion.today.service.interfaces.CodTodayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,9 @@ public class CodTodayController {
     private CodTodayService codTodayService;
 
     @PostMapping("/{tableName}/{brand}/{company}")
-    public String createCodToday(@PathVariable String tableName, @PathVariable String brand, @PathVariable String company){
+    public String createCodToday(@PathVariable String tableName,
+                                 @PathVariable String brand,
+                                 @PathVariable String company){
         return codTodayService.saveCodToday(tableName, brand, company);
     }
 
@@ -31,5 +34,14 @@ public class CodTodayController {
         return codTodayService.detailsShoe(slipperType, brand, codToday)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+    @GetMapping("update/{tableName}/{brand}/{codToday}")
+    public ResponseEntity<String> updateGenerateQR(@PathVariable String tableName,
+                                                   @PathVariable String brand,
+                                                   @PathVariable String codToday){
+
+        String response = codTodayService.updateQR(codToday,tableName,brand, null);
+        return ResponseEntity.ok(response);
+
     }
 }

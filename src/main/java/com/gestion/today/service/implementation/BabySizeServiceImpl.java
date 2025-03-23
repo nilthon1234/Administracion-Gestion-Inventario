@@ -2,36 +2,39 @@ package com.gestion.today.service.implementation;
 
 import com.gestion.today.persistence.models.Baby;
 import com.gestion.today.persistence.repository.RepositoryBaby;
-import com.gestion.today.service.interfaces.ServiceBaby;
+import com.gestion.today.service.exceptiones.InvalidSizeException;
+import com.gestion.today.service.interfaces.SizeService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Service
-public class BabyServiceImpl implements ServiceBaby {
+public class BabySizeServiceImpl implements SizeService<Baby> {
 
     private final RepositoryBaby repositoryBaby;
 
     @Override
-    public Baby saveBaby(Baby baby) {
-        return repositoryBaby.save(baby);
+    public String getEntityType() {
+        return "baby";
     }
 
     @Override
-    public Baby updateZise(String codToday, Map<String, Integer> zises) {
+    public Baby updateSizes(String codToday, Map<String, Integer> sizes) {
+        Baby baby = repositoryBaby.findByCodToday(codToday)
+                .orElseThrow(()-> new EntityNotFoundException("No Baby slipper fount with codToday: " + codToday));
 
-        Optional<Baby> optionalBaby = repositoryBaby.findByCodToday(codToday);
-        if (optionalBaby.isEmpty()){
-            throw  new RuntimeException("No se encontro si producto con codToday: " + codToday);
-        }
+        updateBabySizes(baby, sizes);
+        repositoryBaby.save(baby);
+        baby.setAmount(repositoryBaby.calculateTotalAmount(codToday));
 
-        Baby baby = optionalBaby.get();
+        return repositoryBaby.save(baby);
+    }
 
-        zises.forEach((zise, amount)->{
-            switch (zise){
+    private void updateBabySizes(Baby baby, Map<String, Integer> sizes){
+        sizes.forEach((size, amount) -> {
+            switch (size) {
                 case "eu18": baby.setEu18(baby.getEu18() + amount); break;
                 case "eu18_5": baby.setEu18_5(baby.getEu18_5() + amount); break;
                 case "eu19": baby.setEu19(baby.getEu19() + amount); break;
@@ -52,11 +55,8 @@ public class BabyServiceImpl implements ServiceBaby {
                 case "eu26_5": baby.setEu26_5(baby.getEu26_5() + amount); break;
                 case "eu27": baby.setEu27(baby.getEu27() + amount); break;
                 case "eu27_5": baby.setEu27_5(baby.getEu27_5() + amount); break;
+                default: throw  new InvalidSizeException("Size unknown to Baby: " + size);
             }
         });
-        repositoryBaby.save(baby);
-        baby.setAmount(repositoryBaby.calculateTotalAmount(codToday));
-
-        return repositoryBaby.save(baby);
     }
 }

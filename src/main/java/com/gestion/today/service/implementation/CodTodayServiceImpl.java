@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -110,6 +111,39 @@ public class CodTodayServiceImpl implements CodTodayService {
                 return Optional.empty();
         }
 
+    }
+
+    @Override
+    public String updateQR(String codToday, String tableName, String brand, String company) {
+
+            boolean found = false;
+
+        switch (tableName.toLowerCase()){
+            case "baby":
+                found = repositoryBaby.findByCodToday(codToday).isPresent();
+                break;
+            case  "child":
+                found = repositoryChild.findByCodToday(codToday).isPresent();
+                break;
+            case "littleGirl":
+                found = repositoryLittleGirl.findByCodToday(codToday).isPresent();
+                break;
+            case "man":
+                found = repositoryMan.findByCodToday(codToday).isPresent();
+                break;
+            case "women":
+                found = repositoryWomen.findByCodToday(codToday).isPresent();
+                break;
+            default:
+                return "table invalid";
+        }
+        if (!found){
+            return "codToday: " + codToday + " was not found in the table: " + tableName;
+        }
+        /*
+        TENER EN CUENTA EN ESPISIFICAR EL ORDEN DE LOS PARAMTROS PARA MOSTRAR LOS
+        DETALLES DE DICHA ZAPATILLA*/
+        return generateQrCodeService.generateQRCode( tableName, brand,codToday, company);
     }
 
 

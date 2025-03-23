@@ -21,11 +21,15 @@ public class GenerateQrCodeService {
 
     public String generateQRCode(String tableName, String brand, String codToday, String company) {
         try {
-            String directoryPath = basePath + tableName + "/" + brand;
+            String directoryPath = System.getProperty("user.home")+ "/GRUPOToday-QR/" +tableName+ "/" + brand;
+            /*
+             *String directoryPath = basePath + tableName + "/" + brand;
+             **/
+
             Files.createDirectories(Paths.get(directoryPath));
 
             // Ruta de guardado del QR
-            String filePath = directoryPath + "/QR" + codToday + ".png";
+            String filePath = directoryPath+ "/" + codToday + ".png";
 
             // Contenido del QR
             String data = "http://localhost:8080/cod-today/" + tableName + "/" + brand + "/details/" + codToday;
@@ -65,7 +69,7 @@ public class GenerateQrCodeService {
             // Guardar imagen final
             ImageIO.write(finalImage, "PNG", new File(filePath));
 
-            return "QR guardado en: " + filePath;
+            return "QR save in: " + filePath;
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al generar QR";

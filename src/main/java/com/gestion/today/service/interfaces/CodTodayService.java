@@ -9,4 +9,5 @@ public interface CodTodayService {
     String saveCodToday(String tableName, String brand, String company);
 
     Optional<SlipperDTO> detailsShoe(SlipperType slipperType, String brand, String codToday);
+    String updateQR(String codToday, String tableName, String brand, String company);
 }
