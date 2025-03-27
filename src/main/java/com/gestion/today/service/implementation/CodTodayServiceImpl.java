@@ -7,9 +7,12 @@ import com.gestion.today.service.interfaces.CodTodayService;
 import com.gestion.today.service.mapper.SlipperMapper;
 import com.gestion.today.utils.GenerateCodToday;
 import com.gestion.today.utils.GenerateQrCodeService;
+import com.gestion.today.utils.SlipperFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,12 +37,15 @@ public class CodTodayServiceImpl implements CodTodayService {
 
     @Autowired
     private GenerateQrCodeService generateQrCodeService;
+    @Autowired
+    private SlipperFile slipperFile;
 
 
     @Override
-    public String saveCodToday(String tableName, String brand, String company) {
+    public String saveCodToday(String tableName, String brand, String company, MultipartFile file)throws IOException {
 
         String nextCodToday = generateCodToday.generateNextCodToday(brand);
+        String imagePath = slipperFile.uploadImage(file);
 
         switch (tableName.toLowerCase()) {
             case "baby":
@@ -47,6 +53,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 baby.setBrand(brand);
                 baby.setCodToday(nextCodToday);
                 baby.setCompany(company);
+                baby.setImage(imagePath);
                 repositoryBaby.save(baby);
                 break;
             case "child":
@@ -54,6 +61,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 child.setBrand(brand);
                 child.setCodToday(nextCodToday);
                 child.setCompany(company);
+                child.setImage(imagePath);
                 repositoryChild.save(child);
                 break;
             case "littleGirl":
@@ -61,6 +69,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 littleGirl.setBrand(brand);
                 littleGirl.setCodToday(nextCodToday);
                 littleGirl.setCompany(company);
+                littleGirl.setImage(imagePath);
                 repositoryLittleGirl.save(littleGirl);
                 break;
             case "man":
@@ -68,6 +77,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 man.setBrand(brand);
                 man.setCodToday(nextCodToday);
                 man.setCompany(company);
+                man.setImage(imagePath);
                 repositoryMan.save(man);
                 break;
             case "women":
@@ -75,6 +85,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 women.setBrand(brand);
                 women.setCodToday(nextCodToday);
                 women.setCompany(company);
+                women.setImage(imagePath);
                 repositoryWomen.save(women);
                 break;
             default:

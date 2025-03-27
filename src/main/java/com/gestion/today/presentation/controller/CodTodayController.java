@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/cod-today")
@@ -17,8 +20,9 @@ public class CodTodayController {
     @PostMapping("/{tableName}/{brand}/{company}")
     public String createCodToday(@PathVariable String tableName,
                                  @PathVariable String brand,
-                                 @PathVariable String company){
-        return codTodayService.saveCodToday(tableName, brand, company);
+                                 @PathVariable String company,
+                                 @RequestParam("file")MultipartFile file)throws IOException {
+        return codTodayService.saveCodToday(tableName, brand, company,file);
     }
 
     @GetMapping("/{tableName}/{brand}/details/{codToday}")
