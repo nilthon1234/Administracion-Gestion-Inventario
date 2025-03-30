@@ -11,18 +11,21 @@ import java.nio.file.Paths;
 @Service
 public class FileServiceImpl implements FileService {
     @Override
-    public String uploadFile(String path, MultipartFile file) throws IOException {
+    public String uploadFile(String path, MultipartFile file, String codToday) throws IOException {
 
 
         String fileName = file.getOriginalFilename();
-        String filePath =path + File.separator +fileName;
+        String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+
+        String newFileName = codToday + fileExtension;
+        String filePath =path + File.separator + newFileName;
 
         File f =new File(path);
         if (!f.exists()){
             f.mkdir();
         }
         Files.copy(file.getInputStream(), Paths.get(filePath));
-        return fileName;
+        return newFileName;
     }
 
     @Override

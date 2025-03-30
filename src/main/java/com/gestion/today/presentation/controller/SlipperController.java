@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -30,5 +32,13 @@ public class SlipperController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error:" + e.getMessage());
         }
+    }
+
+    @PutMapping("/update-file/{tableType}/{brand}/{codToday}")
+    public String updateSlipperFile(@PathVariable String tableType,
+                                               @PathVariable String brand,
+                                               @PathVariable String codToday,
+                                               @RequestParam("file")MultipartFile file)throws IOException{
+        return slipperSizeService.updateNameFile(tableType, brand, codToday, file);
     }
 }

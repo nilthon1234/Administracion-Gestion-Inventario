@@ -1,5 +1,6 @@
 package com.gestion.today.persistence.models;
 
+import com.gestion.today.service.interfaces.HasImage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Builder
 @Entity
 @Table
-public class Baby {
+public class Baby implements HasImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

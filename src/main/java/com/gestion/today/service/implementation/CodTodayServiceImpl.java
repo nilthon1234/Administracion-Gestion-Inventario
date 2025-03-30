@@ -45,7 +45,7 @@ public class CodTodayServiceImpl implements CodTodayService {
     public String saveCodToday(String tableName, String brand, String company, MultipartFile file)throws IOException {
 
         String nextCodToday = generateCodToday.generateNextCodToday(brand);
-        String imagePath = slipperFile.uploadImage(file);
+        String imagePath = slipperFile.uploadImage(file,null);
 
         switch (tableName.toLowerCase()) {
             case "baby":
