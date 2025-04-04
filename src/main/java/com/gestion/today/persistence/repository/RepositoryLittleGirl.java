@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -26,4 +29,6 @@ public interface RepositoryLittleGirl extends JpaRepository<LittleGirl, Integer>
     Optional<String> findMaxCodTodayByBrand(@Param("brand") String brand);
 
     Optional<LittleGirl> findByBrandAndCodToday(String brand, String codToday);
+    @Query("SELECT b FROM LittleGirl b WHERE b.registrationDate BETWEEN :start AND :end")
+    List<LittleGirl> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
 }

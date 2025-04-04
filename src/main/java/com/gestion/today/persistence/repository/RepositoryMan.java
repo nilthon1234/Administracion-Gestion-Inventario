@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -26,4 +29,6 @@ public interface RepositoryMan extends JpaRepository<Man, Integer> {
 
 
     Optional<Man> findByBrandAndCodToday(String brand, String codToday);
+    @Query("SELECT b FROM Man b WHERE b.registrationDate BETWEEN :start AND :end")
+    List<Man> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
 }
