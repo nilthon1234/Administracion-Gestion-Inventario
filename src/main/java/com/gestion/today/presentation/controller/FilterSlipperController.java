@@ -1,14 +1,12 @@
 package com.gestion.today.presentation.controller;
 
+import com.gestion.today.persistence.models.SlipperType;
 import com.gestion.today.presentation.dto.SlipperDTO;
 import com.gestion.today.service.interfaces.FilterSlipperService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -29,6 +27,14 @@ public class FilterSlipperController {
                                                              LocalDate date){
         return ResponseEntity.ok(filterSlipperService.filterDate(date));
 
+    }
+
+    @GetMapping("/{tableType}")
+    public ResponseEntity<List<SlipperDTO>> filterSlipper(@PathVariable SlipperType tableType,
+                                                          @RequestParam(required = false) String brand,
+                                                          @RequestParam(required = false)Double size){
+        List<SlipperDTO> result = filterSlipperService.filterSlipper(tableType, brand, size);
+        return ResponseEntity.ok(result);
     }
 
 }

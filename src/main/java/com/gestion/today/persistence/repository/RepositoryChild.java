@@ -30,4 +30,34 @@ public interface RepositoryChild extends JpaRepository<Child, Integer> {
     Optional<Child> findByBrandAndCodToday(String brand, String codToday);
     @Query("SELECT b FROM Child b WHERE b.registrationDate BETWEEN :start AND :end")
     List<Child> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
+    @Query("""
+    SELECT c FROM Child c
+    WHERE (:brand IS NULL OR c.brand = :brand) AND (
+        :size IS NULL OR
+        (:size = 28 AND c.eu28 > 0) OR
+        (:size = 28.5 AND c.eu28_5 > 0) OR
+        (:size = 29 AND c.eu29 > 0) OR
+        (:size = 29.5 AND c.eu29_5 > 0) OR
+        (:size = 30 AND c.eu30 > 0) OR
+        (:size = 30.5 AND c.eu30_5 > 0) OR
+        (:size = 31 AND c.eu31 > 0) OR
+        (:size = 31.5 AND c.eu31_5 > 0) OR
+        (:size = 32 AND c.eu32 > 0) OR
+        (:size = 32.5 AND c.eu32_5 > 0) OR
+        (:size = 33 AND c.eu33 > 0) OR
+        (:size = 33.5 AND c.eu33_5 > 0) OR
+        (:size = 34 AND c.eu34 > 0) OR
+        (:size = 34.5 AND c.eu34_5 > 0) OR
+        (:size = 35 AND c.eu35 > 0) OR
+        (:size = 35.5 AND c.eu35_5 > 0) OR
+        (:size = 36 AND c.eu36 > 0) OR
+        (:size = 36.5 AND c.eu36_5 > 0) OR
+        (:size = 37 AND c.eu37 > 0) OR
+        (:size = 37.5 AND c.eu37_5 > 0) OR
+        (:size = 38 AND c.eu38 > 0) OR
+        (:size = 38.5 AND c.eu38_5 > 0)
+    )
+""")
+    List<Child> findByFilters(@Param("brand") String brand, @Param("size") Double size);
+
 }

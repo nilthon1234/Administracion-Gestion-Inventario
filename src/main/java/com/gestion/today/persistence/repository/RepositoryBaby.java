@@ -32,4 +32,32 @@ public interface RepositoryBaby extends JpaRepository<Baby, Integer> {
     //filter
     @Query("SELECT b FROM Baby b WHERE b.registrationDate BETWEEN :start AND :end")
     List<Baby> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
+    @Query("""
+    SELECT b FROM Baby b
+    WHERE (:brand IS NULL OR b.brand = :brand) AND (
+        :size IS NULL OR
+        (:size = 18 AND b.eu18 > 0) OR
+        (:size = 18.5 AND b.eu18_5 > 0) OR
+        (:size = 19 AND b.eu19 > 0) OR
+        (:size = 19.5 AND b.eu19_5 > 0) OR
+        (:size = 20 AND b.eu20 > 0) OR
+        (:size = 20.5 AND b.eu20_5 > 0) OR
+        (:size = 21 AND b.eu21 > 0) OR
+        (:size = 21.5 AND b.eu21_5 > 0) OR
+        (:size = 22 AND b.eu22 > 0) OR
+        (:size = 22.5 AND b.eu22_5 > 0) OR
+        (:size = 23 AND b.eu23 > 0) OR
+        (:size = 23.5 AND b.eu23_5 > 0) OR
+        (:size = 24 AND b.eu24 > 0) OR
+        (:size = 24.5 AND b.eu24_5 > 0) OR
+        (:size = 25 AND b.eu25 > 0) OR
+        (:size = 25.5 AND b.eu25_5 > 0) OR
+        (:size = 26 AND b.eu26 > 0) OR
+        (:size = 26.5 AND b.eu26_5 > 0) OR
+        (:size = 27 AND b.eu27 > 0) OR
+        (:size = 27.5 AND b.eu27_5 > 0)
+    )
+""")
+    List<Baby> findByFilters(@Param("brand") String brand, @Param("size") Double size);
+
 }

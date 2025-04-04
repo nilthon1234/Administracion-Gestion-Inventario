@@ -31,4 +31,26 @@ public interface RepositoryMan extends JpaRepository<Man, Integer> {
     Optional<Man> findByBrandAndCodToday(String brand, String codToday);
     @Query("SELECT b FROM Man b WHERE b.registrationDate BETWEEN :start AND :end")
     List<Man> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
+    @Query("""
+    SELECT m FROM Man m
+    WHERE (:brand IS NULL OR m.brand = :brand) AND (
+        :size IS NULL OR
+        (:size = 5.5 AND m.usa5_5 > 0) OR
+        (:size = 6 AND m.usa6 > 0) OR
+        (:size = 6.5 AND m.usa6_5 > 0) OR
+        (:size = 7 AND m.usa7 > 0) OR
+        (:size = 7.5 AND m.usa7_5 > 0) OR
+        (:size = 8 AND m.usa8 > 0) OR
+        (:size = 8.5 AND m.usa8_5 > 0) OR
+        (:size = 9 AND m.usa9 > 0) OR
+        (:size = 9.5 AND m.usa9_5 > 0) OR
+        (:size = 10 AND m.usa10 > 0) OR
+        (:size = 10.5 AND m.usa10_5 > 0) OR
+        (:size = 11 AND m.usa11 > 0) OR
+        (:size = 11.5 AND m.usa11_5 > 0) OR
+        (:size = 12 AND m.usa12 > 0)
+    )
+""")
+    List<Man> findByFilters(@Param("brand") String brand, @Param("size") Double size);
+
 }

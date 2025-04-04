@@ -30,4 +30,26 @@ public interface RepositoryWomen extends JpaRepository<Women, Integer> {
     Optional<Women> findByBrandAndCodToday(String brand, String codToday);
     @Query("SELECT b FROM Women b WHERE b.registrationDate BETWEEN :start AND :end")
     List<Women> findByRegistrationDateBetween(@Param("start") Date start, @Param("end") Date end);
+    @Query("""
+    SELECT w FROM Women w
+    WHERE (:brand IS NULL OR w.brand = :brand) AND (
+        :size IS NULL OR
+        (:size = 5.5 AND w.usa5_5 > 0) OR
+        (:size = 6 AND w.usa6 > 0) OR
+        (:size = 6.5 AND w.usa6_5 > 0) OR
+        (:size = 7 AND w.usa7 > 0) OR
+        (:size = 7.5 AND w.usa7_5 > 0) OR
+        (:size = 8 AND w.usa8 > 0) OR
+        (:size = 8.5 AND w.usa8_5 > 0) OR
+        (:size = 9 AND w.usa9 > 0) OR
+        (:size = 9.5 AND w.usa9_5 > 0) OR
+        (:size = 10 AND w.usa10 > 0) OR
+        (:size = 10.5 AND w.usa10_5 > 0) OR
+        (:size = 11 AND w.usa11 > 0) OR
+        (:size = 11.5 AND w.usa11_5 > 0) OR
+        (:size = 12 AND w.usa12 > 0)
+    )
+""")
+    List<Women> findByFilters(@Param("brand") String brand, @Param("size") Double size);
+
 }
