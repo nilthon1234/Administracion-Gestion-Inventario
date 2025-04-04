@@ -51,7 +51,7 @@ public class SlipperSizeServiceImpl {
 
     public String updateNameFile (String tableType, String brand, String codToday, MultipartFile file) throws IOException{
         if (file == null || file.isEmpty()){
-            throw new IllegalArgumentException("el archivo proporcionado es invalido");
+            throw new IllegalArgumentException("the provided file is invalid");
         }
         Map<String, JpaRepository<? extends HasImage, ?>> repositories = Map.of(
                 "baby", repositoryBaby,
@@ -62,32 +62,32 @@ public class SlipperSizeServiceImpl {
         );
         JpaRepository<? extends  HasImage, ?> repository = repositories.get(tableType.toLowerCase());
         if (repository == null){
-            throw new RuntimeException("Tipo de tabla desconocida: " + tableType);
+            throw new RuntimeException("Unknown table type: " + tableType);
         }
         //buscar the entity
         HasImage entity ;
         if (repository instanceof  RepositoryBaby) {
             entity = ((RepositoryBaby) repository).findByBrandAndCodToday(brand, codToday)
-                    .orElseThrow(() -> new RuntimeException("Registro no encontrado en la tabla:'" + tableType + "'"));
+                    .orElseThrow(() -> new RuntimeException("Record not found in table:'" + tableType + "'"));
 
         } else if (repository instanceof RepositoryChild ) {
             entity = ((RepositoryChild) repository).findByBrandAndCodToday(brand, codToday)
-                    .orElseThrow(()-> new RuntimeException("Registro no encontrado en la tabla: '" + tableType + "'"));
+                    .orElseThrow(()-> new RuntimeException("Record not found in table: '" + tableType + "'"));
 
         } else if (repository instanceof RepositoryLittleGirl ) {
             entity = ((RepositoryLittleGirl) repository).findByBrandAndCodToday(brand, codToday)
-                    .orElseThrow(()-> new RuntimeException("Registro no encontrado en la tabla: '" + tableType + "'"));
+                    .orElseThrow(()-> new RuntimeException("Record not found in table: '" + tableType + "'"));
 
         }else if (repository instanceof RepositoryMan) {
             entity = ((RepositoryMan) repository).findByBrandAndCodToday(brand, codToday)
-                    .orElseThrow(()-> new RuntimeException("Registro no encontrado en la tabla: '" + tableType + "'"));
+                    .orElseThrow(()-> new RuntimeException("Record not found in table: '" + tableType + "'"));
 
         }else if (repository instanceof RepositoryWomen ) {
             entity = ((RepositoryWomen) repository).findByBrandAndCodToday(brand, codToday)
-                    .orElseThrow(()-> new RuntimeException("Registro no encontrado en la tabla: '" + tableType + "'"));
+                    .orElseThrow(()-> new RuntimeException("Record not found in table: '" + tableType + "'"));
 
         }else {
-            throw new RuntimeException("Tipo de tabla desconocido: " + tableType);
+            throw new RuntimeException("Unknown table type: " + tableType);
         }
         String newFileName = slipperFile.updateImage(file, entity.getImage(), codToday);
         entity.setImage(newFileName);

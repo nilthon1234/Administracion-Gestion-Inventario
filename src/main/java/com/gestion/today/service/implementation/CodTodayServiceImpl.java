@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -45,7 +44,7 @@ public class CodTodayServiceImpl implements CodTodayService {
     public String saveCodToday(String tableName, String brand, String company, MultipartFile file)throws IOException {
 
         String nextCodToday = generateCodToday.generateNextCodToday(brand);
-        String imagePath = slipperFile.uploadImage(file,null);
+        String imagePath = null;
 
         switch (tableName.toLowerCase()) {
             case "baby":
@@ -53,6 +52,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 baby.setBrand(brand);
                 baby.setCodToday(nextCodToday);
                 baby.setCompany(company);
+                imagePath = slipperFile.uploadImage(file,nextCodToday);
                 baby.setImage(imagePath);
                 repositoryBaby.save(baby);
                 break;
@@ -61,6 +61,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 child.setBrand(brand);
                 child.setCodToday(nextCodToday);
                 child.setCompany(company);
+                imagePath = slipperFile.uploadImage(file,nextCodToday);
                 child.setImage(imagePath);
                 repositoryChild.save(child);
                 break;
@@ -69,6 +70,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 littleGirl.setBrand(brand);
                 littleGirl.setCodToday(nextCodToday);
                 littleGirl.setCompany(company);
+                imagePath = slipperFile.uploadImage(file,nextCodToday);
                 littleGirl.setImage(imagePath);
                 repositoryLittleGirl.save(littleGirl);
                 break;
@@ -77,6 +79,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 man.setBrand(brand);
                 man.setCodToday(nextCodToday);
                 man.setCompany(company);
+                imagePath = slipperFile.uploadImage(file,nextCodToday);
                 man.setImage(imagePath);
                 repositoryMan.save(man);
                 break;
@@ -85,6 +88,7 @@ public class CodTodayServiceImpl implements CodTodayService {
                 women.setBrand(brand);
                 women.setCodToday(nextCodToday);
                 women.setCompany(company);
+                imagePath = slipperFile.uploadImage(file,nextCodToday);
                 women.setImage(imagePath);
                 repositoryWomen.save(women);
                 break;

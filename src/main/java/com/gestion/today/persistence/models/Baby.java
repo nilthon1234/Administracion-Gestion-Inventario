@@ -25,7 +25,7 @@ public class Baby implements HasImage {
     private String codToday;
     private int amount;
     private String image;
-    @Column(name = "cod_Company")
+    @Column(name = "cod_Company", unique = true)
     private String company;
 
     private int eu18;

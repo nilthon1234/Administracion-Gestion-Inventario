@@ -28,7 +28,7 @@ public class SlipperFile {
         File existingFile = new File(existingFilePath);
         if (existingFile.exists()){
             if (!existingFile.delete()){
-                throw new IOException("No se pudo eliminar el archivo existente");
+                throw new IOException("Could not delete existing file");
             }
         }
         return fileService.uploadFile(pathFile,file,codToday);
