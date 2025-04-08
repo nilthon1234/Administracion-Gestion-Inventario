@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -114,7 +115,86 @@ public class SlipperSizeServiceImpl {
 
     }
 
+    public boolean  discountStockBySize(String codToday, Double size, int amount){
+        Optional<Baby> babyOpt = repositoryBaby.findByCodToday(codToday);
+        if (babyOpt.isPresent()){
+            return discountSize(babyOpt.get(), size, amount);
+        }
+        Optional<Child> childOpt = repositoryChild.findByCodToday(codToday);
+        if (childOpt.isPresent()){
+            return discountSize(childOpt.get(),size,amount);
+        }
+        Optional<LittleGirl> littleGirldOpt = repositoryLittleGirl.findByCodToday(codToday);
+        if (littleGirldOpt.isPresent()){
+            return discountSize(littleGirldOpt.get(),size,amount);
+        }
+        Optional<Man> manOpt = repositoryMan.findByCodToday(codToday);
+        if (manOpt.isPresent()){
+            return discountSize(manOpt.get(),size,amount);
+        }
+        Optional<Women> womendOpt = repositoryWomen.findByCodToday(codToday);
+        if (womendOpt.isPresent()){
+            return discountSize(womendOpt.get(),size,amount);
+        }
+        return false;
 
+    }
+
+    private boolean discountSize(Object slipper, Double size, int amount) {
+
+        try {
+
+                String prefix;
+
+                // Determinar el prefijo adecuado según el tipo de objeto
+                if (slipper instanceof Women || slipper instanceof Man) {
+                    prefix = "usa";
+                }
+                else if (slipper instanceof Baby || slipper instanceof Child || slipper instanceof  LittleGirl) {
+                    prefix = "eu";
+                } else {
+                    throw new RuntimeException("Unknown slipper type: no prefix defined");
+                }
+
+            String fieldName = prefix + (size % 1 == 0 ? String.valueOf(size.intValue()) : String.valueOf(size)
+                    .replace(".","_"));
+
+            Field field = slipper.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            int actual = (int) field.get(slipper);
+            if (actual < amount) return false;
+            field.set(slipper, actual - amount);
+            //descontar el amount general
+            Field amountField = slipper.getClass().getDeclaredField("amount");
+            amountField.setAccessible(true);
+            int currentAmount = (int) amountField.get(slipper);
+            amountField.set(slipper, currentAmount - amount);
+            saveSlipper(slipper);
+            return true;
+
+        }catch (NoSuchFieldException e){
+            throw new RuntimeException("Size field not found: " + e.getMessage());
+        }catch (IllegalAccessException e){
+            throw new RuntimeException("the field could not be accessed: " + e.getMessage());
+        }catch (Exception e){
+            throw new RuntimeException("Error updating size" + e.getMessage());
+        }
+    }
+
+    private void saveSlipper(Object slipper) {
+
+        if (slipper instanceof Baby){
+            repositoryBaby.save((Baby) slipper);
+        } else if (slipper instanceof Child) {
+            repositoryChild.save((Child) slipper);
+        } else if (slipper instanceof LittleGirl) {
+            repositoryLittleGirl.save((LittleGirl) slipper);
+        } else if (slipper instanceof Man) {
+            repositoryMan.save((Man) slipper);
+        } else if (slipper instanceof Women) {
+            repositoryWomen.save((Women) slipper);
+        }
+    }
 
 
 }
