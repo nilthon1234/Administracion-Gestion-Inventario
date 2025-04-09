@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Details" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f17ae909-98b7-4e0a-bb98-baa90c050c60">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
+	<queryString language="json">
+		<![CDATA[details]]>
+	</queryString>
+	<field name="sub_total" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="sub_total"/>
+		<fieldDescription><![CDATA[sub_total]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="price"/>
+		<fieldDescription><![CDATA[price]]></fieldDescription>
+	</field>
+	<group name="sub_total">
+		<groupExpression><![CDATA[$F{sub_total}]]></groupExpression>
+	</group>
+	<group name="price">
+		<groupExpression><![CDATA[$F{price}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="278" height="30" uuid="023d45b7-6a8b-4f08-b43a-06226d204fa8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e7fa9a71-29b3-446b-982e-a0811a01a837"/>
+				</reportElement>
+				<text><![CDATA[sub_total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="277" height="30" uuid="9c8fd0a8-f998-474e-bf22-f6550175eb7b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1995a34e-2a45-4ad3-8995-18a0f4e7c18d"/>
+				</reportElement>
+				<text><![CDATA[price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="278" height="30" uuid="d6f11ae9-26b1-4fe5-b869-138b018bd59d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e7fa9a71-29b3-446b-982e-a0811a01a837"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="277" height="30" uuid="13fc6571-b8a9-4d8e-b446-0703ae4076c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1995a34e-2a45-4ad3-8995-18a0f4e7c18d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -5,12 +5,15 @@ import com.gestion.today.persistence.models.Ticket;
 import com.gestion.today.persistence.repository.RepositoryDetailsTicket;
 import com.gestion.today.persistence.repository.RepositoryTicket;
 import com.gestion.today.service.http.request.TicketRequest;
+import com.gestion.today.service.http.response.TicketResponse;
 import com.gestion.today.service.interfaces.SaleTicketService;
+import com.gestion.today.service.mapper.TicketMapper;
 import com.gestion.today.utils.GenerateNroTicket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -67,5 +70,16 @@ public class saleServiceImpl implements SaleTicketService {
             repositoryDetailsTicket.save(details);
 
         }
+    }
+
+    @Override
+    public TicketResponse getTicketByNro(Integer nroTicket) {
+        Ticket ticket = repositoryTicket.findById(nroTicket)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+        List<Ticket> listTicket = repositoryTicket.findByNroTicket(nroTicket);
+        List<DetailTicket> detail = repositoryDetailsTicket.findByTicket_NroTicket(nroTicket);
+
+
+        return TicketMapper.toDto(listTicket, detail);
     }
 }

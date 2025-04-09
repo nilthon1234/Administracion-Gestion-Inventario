@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1bd4a064-919e-4ad9-bb55-35cf8f3dc292">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
+	<parameter name="ticketId" class="java.lang.String"/>
+	<queryString language="json">
+		<![CDATA[ticket]]>
+	</queryString>
+	<field name="nro_ticket" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="nro_ticket"/>
+		<fieldDescription><![CDATA[nro_ticket]]></fieldDescription>
+	</field>
+	<field name="client_last_name" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="client_last_name"/>
+		<fieldDescription><![CDATA[client_last_name]]></fieldDescription>
+	</field>
+	<field name="dni" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="dni"/>
+		<fieldDescription><![CDATA[dni]]></fieldDescription>
+	</field>
+	<group name="nro_ticket">
+		<groupExpression><![CDATA[$F{nro_ticket}]]></groupExpression>
+	</group>
+	<group name="client_last_name">
+		<groupExpression><![CDATA[$F{client_last_name}]]></groupExpression>
+	</group>
+	<group name="dni">
+		<groupExpression><![CDATA[$F{dni}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="30" uuid="bb5b1eb3-3e81-48a1-b1ba-8628db4ff68b"/>
+				<textFieldExpression><![CDATA[$F{nro_ticket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="30" uuid="789690cc-4f0f-4065-925f-96e61e0187d9"/>
+				<textFieldExpression><![CDATA[$F{client_last_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="30" uuid="587b5631-f36e-4aeb-ac30-ccdb0bb61c3c"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
