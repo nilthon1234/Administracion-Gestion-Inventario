@@ -5,6 +5,7 @@ import com.gestion.today.service.http.response.TicketResponse;
 import com.gestion.today.service.interfaces.SaleTicketService;
 import com.gestion.today.utils.GenerateTicketReport;
 import com.gestion.today.utils.ReporteGenerator;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -50,17 +51,11 @@ public class SaleController {
     public ResponseEntity<byte[]> generatePdfReport(@PathVariable String ticketId)
             throws JRException, IOException {
 
-        List<Map<String, Object>> ticketData = generateTicketReport.getTicketData(ticketId);
-        List<Map<String, Object>> detailsData = generateTicketReport.getDetailsData(ticketId);
 
-        JasperPrint ticketPrint = reporteGenerator.generateTicketReport(ticketData);
-        JasperPrint detailsPrint = reporteGenerator.generateDetailsReport(detailsData);
-
-        byte[] pdfBytes = reporteGenerator.combineReports(ticketPrint, detailsPrint);
-
+        byte[] pdfBytes = saleTicketService.generatePDF(ticketId);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDisposition(ContentDisposition.builder("attachment")
+        headers.setContentDisposition(ContentDisposition.builder("inline")
                 .filename("reporte_completo.pdf").build());
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);

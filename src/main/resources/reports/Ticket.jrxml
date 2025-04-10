@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1bd4a064-919e-4ad9-bb55-35cf8f3dc292">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket" pageWidth="295" pageHeight="242" columnWidth="255" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="17169fe9-d68b-43be-b295-18728ebe835e">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
-	<parameter name="ticketId" class="java.lang.String"/>
 	<queryString language="json">
 		<![CDATA[ticket]]>
 	</queryString>
@@ -18,50 +17,68 @@
 		<property name="net.sf.jasperreports.json.field.expression" value="dni"/>
 		<fieldDescription><![CDATA[dni]]></fieldDescription>
 	</field>
-	<group name="nro_ticket">
-		<groupExpression><![CDATA[$F{nro_ticket}]]></groupExpression>
-	</group>
-	<group name="client_last_name">
-		<groupExpression><![CDATA[$F{client_last_name}]]></groupExpression>
-	</group>
-	<group name="dni">
-		<groupExpression><![CDATA[$F{dni}]]></groupExpression>
-	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="42" uuid="a6ef077b-3786-4fa1-b03e-757620ca421f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Boleta ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="170" height="44" uuid="281cfde7-b028-4d7f-ae84-02d27e95da2c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA["GRUPO TODAY"]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="30" uuid="bb5b1eb3-3e81-48a1-b1ba-8628db4ff68b"/>
+				<reportElement x="50" y="10" width="100" height="30" uuid="cfb9c501-620c-47ea-b7be-d03dd9137e69"/>
 				<textFieldExpression><![CDATA[$F{nro_ticket}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="30" uuid="789690cc-4f0f-4065-925f-96e61e0187d9"/>
+				<reportElement x="50" y="40" width="100" height="30" uuid="42e7230f-35b9-47e1-a424-bc4526415ef3"/>
 				<textFieldExpression><![CDATA[$F{client_last_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="185" height="30" uuid="587b5631-f36e-4aeb-ac30-ccdb0bb61c3c"/>
+				<reportElement x="50" y="70" width="100" height="30" uuid="ba25bc05-4b53-434d-84e4-dcd2ef7bfa53"/>
 				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="-13" y="10" width="63" height="30" uuid="0579c69e-a432-49ca-92ed-483c1128d35a"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FCF7F7"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro Boleta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="40" width="63" height="30" uuid="d5feb13f-ea15-4c43-b556-7f0f19f4a5bc"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FCF7F7"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom Client:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-13" y="70" width="63" height="30" uuid="5ae20e52-3ccf-45ae-89c3-ac7847c46e9c"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFCFC"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dni Cliente:]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
