@@ -9,20 +9,9 @@ import com.gestion.today.service.http.response.TicketResponse;
 import com.gestion.today.service.interfaces.SaleTicketService;
 import com.gestion.today.service.mapper.TicketMapper;
 import com.gestion.today.utils.GenerateNroTicket;
-import com.gestion.today.utils.GenerateTicketReport;
-import com.gestion.today.utils.ReporteGenerator;
 import lombok.RequiredArgsConstructor;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,8 +24,6 @@ public class saleServiceImpl implements SaleTicketService {
     private final RepositoryDetailsTicket repositoryDetailsTicket;
     private final GenerateNroTicket generateNroTicket;
     private final SlipperSizeServiceImpl slipperSizeService;
-    private final GenerateTicketReport generateTicketReport;
-    private final ReporteGenerator reporteGenerator;
 
     @Override
     @Transactional
@@ -96,20 +83,4 @@ public class saleServiceImpl implements SaleTicketService {
                 .build();
     }
 
-    @Override
-    public byte[] generatePDF(String ticketId)throws JRException, IOException {
-        List<Map<String, Object>> ticketData = generateTicketReport.getTicketData(ticketId);
-        List<Map<String, Object>> detailsData = generateTicketReport.getDetailsData(ticketId);
-        JasperPrint ticketPrint =   reporteGenerator.generateTicketReport(ticketData);
-        JasperPrint detailsPrint =   reporteGenerator.generateDetailsReport(detailsData);
-
-        List<JasperPrint> prints = Arrays.asList(ticketPrint,detailsPrint);
-
-        JRPdfExporter exporter = new JRPdfExporter();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        exporter.setExporterInput(SimpleExporterInput.getInstance(prints));
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
-        exporter.exportReport();
-        return outputStream.toByteArray();
-    }
 }

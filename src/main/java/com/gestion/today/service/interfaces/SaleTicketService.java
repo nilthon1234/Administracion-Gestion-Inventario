@@ -10,5 +10,4 @@ public interface SaleTicketService {
 
    void   registerTicketAndDetailsSave (TicketRequest request);
    TicketResponse getTicketByNro(Integer nroTicket);
-   byte[] generatePDF(String ticketId)throws JRException, IOException;
 }

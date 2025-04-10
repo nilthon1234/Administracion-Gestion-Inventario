@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentaReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58c811fb-cae8-4e44-bb4e-ad6dc503eaad">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentaReport" pageWidth="295" pageHeight="842" columnWidth="255" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58c811fb-cae8-4e44-bb4e-ad6dc503eaad">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<parameter name="detailsDataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
@@ -26,15 +26,15 @@
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="30" uuid="f53d973e-9ba6-44c1-982c-7531ee1769fd"/>
+				<reportElement x="0" y="0" width="80" height="30" uuid="f53d973e-9ba6-44c1-982c-7531ee1769fd"/>
 				<textFieldExpression><![CDATA[$F{nro_ticket}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="30" uuid="6293aa16-bf9d-45d9-9904-4a3345c8276a"/>
+				<reportElement x="80" y="0" width="100" height="30" uuid="6293aa16-bf9d-45d9-9904-4a3345c8276a"/>
 				<textFieldExpression><![CDATA[$F{client_last_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="185" height="30" uuid="f7a99673-31b1-437a-965b-14c6961b37d9"/>
+				<reportElement x="180" y="0" width="70" height="30" uuid="f7a99673-31b1-437a-965b-14c6961b37d9"/>
 				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
 			</textField>
 		</band>
