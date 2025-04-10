@@ -9,12 +9,7 @@ import java.util.stream.Collectors;
 
 public class TicketMapper {
 
-    public static TicketResponse toDto(List<Ticket> ticket, List<DetailTicket> details){
-        return TicketResponse.builder()
-                .ticket(ticket.stream().map(TicketMapper::mapTicket).collect(Collectors.toList()))
-                .details(details.stream().map(TicketMapper::mapDetail).collect(Collectors.toList()))
-                .build();
-    }
+
 
     private static TicketResponse.DetailDTO mapDetail(DetailTicket detailTicket) {
 
@@ -23,11 +18,14 @@ public class TicketMapper {
                 .price(detailTicket.getPrice())
                 .build();
     }
-    private static TicketResponse.TicketDTO mapTicket(Ticket ticket){
+    public static TicketResponse.TicketDTO mapTicket(Ticket ticket, List<DetailTicket> detailTicket) {
         return TicketResponse.TicketDTO.builder()
                 .nro_ticket(ticket.getNroTicket())
                 .client_last_name(ticket.getClientLastName())
                 .dni(ticket.getDni())
+                .detail(detailTicket.stream()
+                        .map(TicketMapper::mapDetail)
+                        .toList())
                 .build();
     }
 }

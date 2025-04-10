@@ -88,11 +88,12 @@ public class saleServiceImpl implements SaleTicketService {
     public TicketResponse getTicketByNro(Integer nroTicket) {
         Ticket ticket = repositoryTicket.findById(nroTicket)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
-        List<Ticket> listTicket = repositoryTicket.findByNroTicket(nroTicket);
         List<DetailTicket> detail = repositoryDetailsTicket.findByTicket_NroTicket(nroTicket);
 
 
-        return TicketMapper.toDto(listTicket, detail);
+        return TicketResponse.builder()
+                .ticket(List.of(TicketMapper.mapTicket(ticket, detail)))
+                .build();
     }
 
     @Override

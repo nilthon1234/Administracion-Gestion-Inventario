@@ -12,7 +12,6 @@ import java.util.List;
 public class TicketResponse {
 
    private  List<TicketDTO> ticket;
-    private List<DetailDTO> details;
 
     @Getter
     @Setter
@@ -29,6 +28,7 @@ public class TicketResponse {
         private Integer nro_ticket;
         private String client_last_name;
         private int dni;
+        private List<DetailDTO> detail;
     }
 
 }
