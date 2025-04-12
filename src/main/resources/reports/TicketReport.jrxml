@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketReport" pageWidth="295" pageHeight="442" columnWidth="255" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="51f8a159-e686-4eae-a047-a12a54b25596">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="detailsDataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<queryString language="json">
+		<![CDATA[ticket]]>
+	</queryString>
+	<field name="nro_ticket" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="nro_ticket"/>
+		<fieldDescription><![CDATA[nro_ticket]]></fieldDescription>
+	</field>
+	<field name="sellerName" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="sellerName"/>
+		<fieldDescription><![CDATA[sellerName]]></fieldDescription>
+	</field>
+	<field name="clientName" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="clientName"/>
+		<fieldDescription><![CDATA[clientName]]></fieldDescription>
+	</field>
+	<field name="client_last_name" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="client_last_name"/>
+		<fieldDescription><![CDATA[client_last_name]]></fieldDescription>
+	</field>
+	<field name="registrationTicket" class="java.util.Date">
+		<property name="net.sf.jasperreports.json.field.expression" value="registrationTicket"/>
+		<fieldDescription><![CDATA[registrationTicket]]></fieldDescription>
+	</field>
+	<field name="dni" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="dni"/>
+		<fieldDescription><![CDATA[dni]]></fieldDescription>
+	</field>
+	<field name="detail" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="detail"/>
+		<fieldDescription><![CDATA[detail]]></fieldDescription>
+	</field>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="22" width="70" height="35" uuid="bbac3c74-a8f5-40fb-8ef6-3c29fa5e6963"/>
+				<textElement textAlignment="Left">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Boleta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="22" width="175" height="35" uuid="674ddcfe-74b3-4997-bc4e-5f674795504b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Baskerville Old Face" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA["GRUPO TODAY"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="62" width="60" height="20" forecolor="#F2231F" backcolor="#F71814" uuid="214a1c0e-27b8-4e7f-9499-9541cc01282c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro Boleta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="63" width="69" height="20" forecolor="#FA221E" uuid="f59dd8fd-d14c-408b-aea8-e527bcb3c6f0"/>
+				<textElement>
+					<font fontName="Cooper Black"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nro_ticket}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="0" width="60" height="20" forecolor="#F2231F" backcolor="#F71814" uuid="1dd4c86c-0f02-4b68-88cc-74eea19a8d08"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendedor(a):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="0" width="55" height="20" uuid="d50e4ac8-b4c0-4f21-955b-ef58f903d610"/>
+				<textFieldExpression><![CDATA[$F{sellerName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="25" width="79" height="20" uuid="216110ad-644a-48a9-a9c6-5955b74b47dd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="25" width="59" height="20" uuid="c2c0203d-9097-4806-81e2-4c12eaf4dfb1"/>
+				<textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="23" width="255" height="1" uuid="93a91d79-5d11-4bb6-9fac-e406e2fb3867"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="45" width="81" height="20" uuid="5f6b5fe2-798f-4bfe-940b-165da8f719f4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="45" width="44" height="20" uuid="fafb86d6-4b7f-40df-9f04-e6144b563102"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{client_last_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="25" width="42" height="20" uuid="37386894-2b07-4250-881b-2d8cf6427b44"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dni:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="25" width="55" height="20" uuid="f1a393ec-2209-49a8-9052-d59de893aecd"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="-15" width="60" height="18" forecolor="#F2231F" backcolor="#141AD9" uuid="6f855227-b3aa-446b-8211-9e0754f428b0"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Venta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="-15" width="126" height="18" uuid="36cbb21b-7bb9-4502-8e3b-2ea71cdafca9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registrationTicket}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="72" width="124" height="20" uuid="678bcf99-5635-47cb-acee-ce4368eaec9f"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DETALLES DE VENTA:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement x="2" y="-28" width="255" height="40" uuid="adc2de0d-e38f-45a2-9c18-b98cf852f37e"/>
+				<dataSourceExpression><![CDATA[$P{detailsDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"DetailsReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

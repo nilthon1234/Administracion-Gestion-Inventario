@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetailsReport" pageWidth="295" pageHeight="442" columnWidth="255" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3536f865-67bd-45fe-b238-d16f77345eee">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket-Json-Data-Adapter"/>
+	<queryString language="json">
+		<![CDATA[ticket.detail]]>
+	</queryString>
+	<field name="amount" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="amount"/>
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<field name="codToday" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="codToday"/>
+		<fieldDescription><![CDATA[codToday]]></fieldDescription>
+	</field>
+	<field name="size" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="size"/>
+		<fieldDescription><![CDATA[size]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="price"/>
+		<fieldDescription><![CDATA[price]]></fieldDescription>
+	</field>
+	<field name="sub_total" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="sub_total"/>
+		<fieldDescription><![CDATA[sub_total]]></fieldDescription>
+	</field>
+	<field name="totalPagar" class="java.lang.String"/>
+	<variable name="sumTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sub_total}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<staticText>
+				<reportElement x="-24" y="-19" width="30" height="30" uuid="37cb5c1d-b55b-404e-9efb-23f8b5d3f5d5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8f0c4861-8354-40b5-8fac-0532ab0f0b07"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="-19" width="51" height="30" uuid="0c6df1d8-a50c-4b3f-9a0d-a3eb8dd9e06c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b2127fc-c7b1-43ec-87f9-299cbb39e8a2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[codToday]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="-19" width="86" height="30" uuid="58f3b4ee-2014-4819-8f37-56945342adfc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d751271-08f9-46c6-9d43-c34f238202eb"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Talla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="-19" width="48" height="30" uuid="151ae728-2abb-4427-acfd-b19d3ad9cca3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6bb5dd4e-2858-4756-8150-b1c6294aa6fc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="-19" width="48" height="30" uuid="812cc04b-bb8f-4772-b444-3694c0715421">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a6f6ccf7-bf63-43a5-be0f-2be5b4b744bd"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="100" height="11" uuid="e5ec9073-a213-46a4-8651-2b17e5a76282">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f141533-97ba-43ba-8b2f-9961d3eca6d2"/>
+				</reportElement>
+				<text><![CDATA[totalPagar]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="5" y="-30" width="1" height="35" uuid="3ba7f8bf-220f-4776-a4e4-729ce3782e37"/>
+			</line>
+			<line>
+				<reportElement x="60" y="-29" width="1" height="35" uuid="4745aa9e-ae56-4e50-b3f8-87bb1f25e712"/>
+			</line>
+			<line>
+				<reportElement x="146" y="-29" width="1" height="35" uuid="3f584e3d-e259-4ca7-a21b-3b04afea5f38"/>
+			</line>
+			<line>
+				<reportElement x="196" y="-29" width="1" height="35" uuid="27dc05dd-e931-40ff-ae62-fd299c37eccf"/>
+			</line>
+			<textField>
+				<reportElement x="-24" y="-16" width="30" height="30" uuid="23acb155-1e60-47a0-8649-d0fc9c8bfdf3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8f0c4861-8354-40b5-8fac-0532ab0f0b07"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="-16" width="51" height="30" uuid="29d411c8-923f-4761-8667-1d37af96da8c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b2127fc-c7b1-43ec-87f9-299cbb39e8a2"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{codToday}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="-16" width="86" height="30" uuid="a136574c-74ba-4f18-955b-86fa8f34a568">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d751271-08f9-46c6-9d43-c34f238202eb"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="-16" width="48" height="30" uuid="c7f5e3e1-6423-49ef-8fef-2fc6b3e83cad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6bb5dd4e-2858-4756-8150-b1c6294aa6fc"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="-17" width="39" height="30" uuid="2a3932d1-3cac-476c-9f6b-d1ce1ac22630">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a6f6ccf7-bf63-43a5-be0f-2be5b4b744bd"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27">
+			<staticText>
+				<reportElement x="126" y="0" width="65" height="26" uuid="dc087445-6ccc-4c8a-b617-96cc56699e07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pagar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="191" y="0" width="58" height="26" forecolor="#F5071B" uuid="46c392a4-586c-467c-8d62-322d2ddd258f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -13,11 +13,11 @@ import java.io.InputStream;
 public class ReportCompiler {
 
     public JasperReport compileTicketReport() throws JRException {
-        InputStream reportStream = ReportCompiler.class.getResourceAsStream("/reports/VentaReport.jrxml");
+        InputStream reportStream = ReportCompiler.class.getResourceAsStream("/reports/TicketReport.jrxml");
         return JasperCompileManager.compileReport(reportStream);
     }
     public JasperReport compileDetailsSubReport() throws JRException {
-        InputStream reportStream = ReportCompiler.class.getResourceAsStream("/reports/DetailsSub.jrxml");
+        InputStream reportStream = ReportCompiler.class.getResourceAsStream("/reports/DetailsReport.jrxml");
         JasperReport subReport = JasperCompileManager.compileReport(reportStream);
         saveSubReportTemp(subReport);
         return subReport;
@@ -25,7 +25,7 @@ public class ReportCompiler {
 
     private void saveSubReportTemp(JasperReport subReport) throws JRException {
         String tempDir = getTempDir();
-        String subReportPath = tempDir + "DetailsSub.jasper";
+        String subReportPath = tempDir + "DetailsReport.jasper";
         JRSaver.saveObject(subReport, subReportPath);
     }
 

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -17,8 +19,13 @@ public class TicketResponse {
     @Setter
     @Builder
     public  static class  DetailDTO{
-        private Double sub_total;
+        private  int amount;
+        private String codToday;
+        private String size;
         private Double price;
+        private Double sub_total;
+        //requerrido por jaspert studio
+        private BigDecimal totalPagar;
     }
 
     @Getter
@@ -26,7 +33,10 @@ public class TicketResponse {
     @Builder
     public  static  class TicketDTO{
         private Integer nro_ticket;
+        private String sellerName;
+        private String clientName;
         private String client_last_name;
+        private Date registrationTicket;
         private int dni;
         private List<DetailDTO> detail;
     }
