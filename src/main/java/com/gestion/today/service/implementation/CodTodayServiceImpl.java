@@ -10,8 +10,10 @@ import com.gestion.today.utils.GenerateQrCodeService;
 import com.gestion.today.utils.SlipperFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -39,92 +41,137 @@ public class CodTodayServiceImpl implements CodTodayService {
     @Autowired
     private SlipperFile slipperFile;
 
-
+    @Transactional
     @Override
     public String saveCodToday(String tableName, String brand, String company, MultipartFile file)throws IOException {
 
         String nextCodToday = generateCodToday.generateNextCodToday(brand);
         String imagePath = null;
+        File temFile = null;
 
-        switch (tableName.toLowerCase()) {
-            case "baby":
-                Baby baby = new Baby();
-                baby.setBrand(brand);
-                baby.setCodToday(nextCodToday);
-                baby.setCompany(company);
-                imagePath = slipperFile.uploadImage(file,nextCodToday);
-                baby.setImage(imagePath);
-                repositoryBaby.save(baby);
-                break;
-            case "child":
-                Child child = new Child();
-                child.setBrand(brand);
-                child.setCodToday(nextCodToday);
-                child.setCompany(company);
-                imagePath = slipperFile.uploadImage(file,nextCodToday);
-                child.setImage(imagePath);
-                repositoryChild.save(child);
-                break;
-            case "littleGirl":
-                LittleGirl littleGirl = new LittleGirl();
-                littleGirl.setBrand(brand);
-                littleGirl.setCodToday(nextCodToday);
-                littleGirl.setCompany(company);
-                imagePath = slipperFile.uploadImage(file,nextCodToday);
-                littleGirl.setImage(imagePath);
-                repositoryLittleGirl.save(littleGirl);
-                break;
-            case "man":
-                Man man = new Man();
-                man.setBrand(brand);
-                man.setCodToday(nextCodToday);
-                man.setCompany(company);
-                imagePath = slipperFile.uploadImage(file,nextCodToday);
-                man.setImage(imagePath);
-                repositoryMan.save(man);
-                break;
-            case "women":
-                Women women = new Women();
-                women.setBrand(brand);
-                women.setCodToday(nextCodToday);
-                women.setCompany(company);
-                imagePath = slipperFile.uploadImage(file,nextCodToday);
-                women.setImage(imagePath);
-                repositoryWomen.save(women);
-                break;
-            default:
-                return "Invalid table";
+        try {
 
 
+            switch (tableName.toLowerCase()) {
+                case "baby":
+                    if (repositoryBaby.existsByCompany(company)){
+                        throw new RuntimeException("Company already exists");
+                    }
+                    imagePath = slipperFile.uploadImage(file,nextCodToday);
+                    temFile = new File(imagePath);
+
+                    Baby baby = new Baby();
+                    baby.setBrand(brand);
+                    baby.setCodToday(nextCodToday);
+                    baby.setCompany(company);
+                    baby.setImage(imagePath);
+                    State idState = new State();
+                    idState.setId(1);
+                    baby.setState(idState);
+                    repositoryBaby.save(baby);
+                    break;
+                case "child":
+                    if (repositoryChild.existsByCompany(company)){
+                        throw new RuntimeException("Company already exists");
+                    }
+                    imagePath = slipperFile.uploadImage(file,nextCodToday);
+                    temFile  = new File(imagePath);
+
+                    Child child = new Child();
+                    child.setBrand(brand);
+                    child.setCodToday(nextCodToday);
+                    child.setCompany(company);
+                    child.setImage(imagePath);
+                    State idStatechild = new State();
+                    idStatechild.setId(1);
+                    child.setState(idStatechild);
+                    repositoryChild.save(child);
+                    break;
+                case "littleGirl":
+
+                    if (repositoryLittleGirl.existsByCompany(company)){
+                        throw new RuntimeException("Company already exists");
+                    }
+                    imagePath = slipperFile.uploadImage(file,nextCodToday);
+                    temFile = new File(imagePath);
+                    LittleGirl littleGirl = new LittleGirl();
+                    littleGirl.setBrand(brand);
+                    littleGirl.setCodToday(nextCodToday);
+                    littleGirl.setCompany(company);
+
+                    State idStatelittleGirl = new State();
+                    idStatelittleGirl.setId(1);
+                    littleGirl.setState(idStatelittleGirl);
+
+                    littleGirl.setImage(imagePath);
+                    repositoryLittleGirl.save(littleGirl);
+                    break;
+                case "man":
+                    if (repositoryMan.existsByCompany(company)){
+                        throw new RuntimeException("Company already exists");
+                    }
+                    imagePath = slipperFile.uploadImage(file,nextCodToday);
+                    temFile = new File(imagePath);
+                    Man man = new Man();
+                    man.setBrand(brand);
+                    man.setCodToday(nextCodToday);
+                    man.setCompany(company);
+                    man.setImage(imagePath);
+                    State idMan = new State();
+                    idMan.setId(1);
+                    man.setState(idMan);
+                    repositoryMan.save(man);
+                    break;
+                case "women":
+                    if (repositoryWomen.existsByCompany(company)){
+                        throw new RuntimeException("Company already exists");
+                    }
+                    imagePath = slipperFile.uploadImage(file,nextCodToday);
+                    temFile = new File(imagePath);
+                    Women women = new Women();
+                    women.setBrand(brand);
+                    women.setCodToday(nextCodToday);
+                    women.setCompany(company);
+                    State idwomenState = new State();
+                    idwomenState.setId(1);
+                    women.setState(idwomenState);
+                    women.setImage(imagePath);
+                    repositoryWomen.save(women);
+                    break;
+                default:
+                    return "Invalid table";
+
+
+            }
+            String qrPath = generateQrCodeService.generateQRCode(tableName, brand,nextCodToday, company );
+
+            return "code inserted correctly in the " + tableName +
+                    " con cod_today: " + nextCodToday +
+                    ".QR generate in: " + qrPath;
+
+        } catch (Exception e) {
+            if (temFile != null && temFile.exists()) {
+                temFile.delete();
+            }
+            throw e;
         }
-        String qrPath = generateQrCodeService.generateQRCode(tableName, brand,nextCodToday, company );
-
-        return "code inserted correctly in the " + tableName +
-                " con cod_today: " + nextCodToday +
-                ".QR generate in: " + qrPath;
     }
 
     @Override
     public Optional<SlipperDTO> detailsShoe(SlipperType slipperType, String brand, String codToday) {
-        switch (slipperType){
-            case BABY:
-                return repositoryBaby.findByBrandAndCodToday(brand, codToday)
-                        .map(SlipperMapper::mapToDto);
-            case CHILD:
-                return repositoryChild.findByBrandAndCodToday(brand, codToday)
-                        .map(SlipperMapper::mapToDto);
-            case LITTLEGIRL:
-                return repositoryLittleGirl.findByBrandAndCodToday(brand, codToday)
-                        .map(SlipperMapper::mapToDto);
-            case MAN:
-                return repositoryMan.findByBrandAndCodToday(brand, codToday)
-                        .map(SlipperMapper::mapToDto);
-            case WOMEN:
-                return  repositoryWomen.findByBrandAndCodToday(brand, codToday)
-                        .map(SlipperMapper::mapToDto);
-            default:
-                return Optional.empty();
-        }
+        return switch (slipperType) {
+            case BABY -> repositoryBaby.findByBrandAndCodToday(brand, codToday)
+                    .map(SlipperMapper::mapToDto);
+            case CHILD -> repositoryChild.findByBrandAndCodToday(brand, codToday)
+                    .map(SlipperMapper::mapToDto);
+            case LITTLEGIRL -> repositoryLittleGirl.findByBrandAndCodToday(brand, codToday)
+                    .map(SlipperMapper::mapToDto);
+            case MAN -> repositoryMan.findByBrandAndCodToday(brand, codToday)
+                    .map(SlipperMapper::mapToDto);
+            case WOMEN -> repositoryWomen.findByBrandAndCodToday(brand, codToday)
+                    .map(SlipperMapper::mapToDto);
+            default -> Optional.empty();
+        };
 
     }
 

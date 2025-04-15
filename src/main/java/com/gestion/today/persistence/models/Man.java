@@ -28,6 +28,10 @@ public class Man implements HasImage {
     @Column(name = "cod_Company", unique = true)
     private String company;
 
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
+
     private int usa5_5;
     private int usa6;
     private int usa6_5;

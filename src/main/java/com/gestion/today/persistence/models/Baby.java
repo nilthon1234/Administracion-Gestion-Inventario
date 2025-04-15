@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,8 +26,12 @@ public class Baby implements HasImage {
     private String codToday;
     private int amount;
     private String image;
+
     @Column(name = "cod_Company", unique = true)
     private String company;
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
 
     private int eu18;
     private int eu18_5;
@@ -65,6 +70,9 @@ public class Baby implements HasImage {
     @PrePersist
     protected void onCreate(){
         registrationDate = new Date();
+
+
+
     }
 
 }

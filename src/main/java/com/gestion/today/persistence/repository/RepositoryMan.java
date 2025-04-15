@@ -52,5 +52,5 @@ public interface RepositoryMan extends JpaRepository<Man, Integer> {
     )
 """)
     List<Man> findByFilters(@Param("brand") String brand, @Param("size") Double size);
-
+    boolean existsByCompany(String company);
 }

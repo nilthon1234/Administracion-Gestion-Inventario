@@ -27,6 +27,9 @@ public class Child implements HasImage {
 
     @Column(name = "cod_Company", unique = true)
     private String company;
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
 
     private int eu28;
     private int eu28_5;

@@ -18,11 +18,16 @@ public class CodTodayController {
     private CodTodayService codTodayService;
 
     @PostMapping("/{tableName}/{brand}/{company}")
-    public String createCodToday(@PathVariable String tableName,
+    public ResponseEntity<?> createCodToday(@PathVariable String tableName,
                                  @PathVariable String brand,
                                  @PathVariable String company,
-                                 @RequestParam("file")MultipartFile file)throws IOException {
-        return codTodayService.saveCodToday(tableName, brand, company,file);
+                                 @RequestParam("file")MultipartFile file){
+        try {
+            String resul = codTodayService.saveCodToday(tableName, brand, company,file);
+            return ResponseEntity.ok(resul);
+        }catch (IOException e){
+            return ResponseEntity.badRequest().body("ERROR" + e.getMessage());
+        }
     }
 
     @GetMapping("/{tableName}/{brand}/details/{codToday}")

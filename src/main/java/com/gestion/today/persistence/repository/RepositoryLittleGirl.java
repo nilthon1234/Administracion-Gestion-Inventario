@@ -61,4 +61,5 @@ public interface RepositoryLittleGirl extends JpaRepository<LittleGirl, Integer>
     )
 """)
     List<LittleGirl> findByFilters(@Param("brand") String brand, @Param("size") Double size);
+    boolean existsByCompany(String company);
 }
