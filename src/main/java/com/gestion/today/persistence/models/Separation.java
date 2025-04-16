@@ -21,5 +21,8 @@ public class Separation {
     private int dni;
     private String codToday;
     private String size;
+    private Double amortization;
+    private Double amount;
+    private Double price;
 
 }
