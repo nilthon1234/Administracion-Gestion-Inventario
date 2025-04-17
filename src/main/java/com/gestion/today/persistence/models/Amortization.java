@@ -31,6 +31,7 @@ public class Amortization {
     private Date registrationAmortization;
 
     @PrePersist
+
     protected void onCreate(){
         registrationAmortization = new Date();
     }

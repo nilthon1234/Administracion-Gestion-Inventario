@@ -1,6 +1,7 @@
 package com.gestion.today.presentation.controller;
 
 import com.gestion.today.presentation.dto.AmortizationDto;
+import com.gestion.today.service.http.response.AmortizationResponse;
 import com.gestion.today.service.interfaces.AmortizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,13 @@ public class AmortizationController {
     private final AmortizationService amortizationService;
 
     @PostMapping("register")
-    public ResponseEntity<Map<String, Object>> registerAmortitation(@RequestBody AmortizationDto request) {
-        String result = amortizationService.registerAmortization(
+    public ResponseEntity<AmortizationResponse> registerAmortitation(@RequestBody AmortizationDto request) {
+        AmortizationResponse result = amortizationService.registerAmortization(
                 request.getIdClient(),
                 request.getDni(),
                 request.getAccount(),
                 request.getPayType()
         );
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", result);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(result);
     }
 }

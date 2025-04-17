@@ -6,6 +6,8 @@ import com.gestion.today.persistence.models.num.PayType;
 import com.gestion.today.persistence.models.num.StateSeparationType;
 import com.gestion.today.persistence.repository.RepositoryAmortization;
 import com.gestion.today.persistence.repository.RepositoryClient;
+import com.gestion.today.service.exceptiones.AmortizationExceededException;
+import com.gestion.today.service.http.response.AmortizationResponse;
 import com.gestion.today.service.interfaces.AmortizationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,26 +25,25 @@ public class AmortizationServiceImpl implements AmortizationService {
     private final RepositoryAmortization repositoryAmortization;
 
     @Override
-    public String registerAmortization(String idClient, int dni, Double account, PayType payType) {
+    public AmortizationResponse registerAmortization(String idClient, int dni, Double account, PayType payType) {
 
         Optional<Client> optionalClient = repositoryClient.findById(idClient);
-        if (optionalClient.isEmpty()) {
-            return "Client not found";
+
+        if (optionalClient.isEmpty() || optionalClient.get().getDni() != dni) {
+            throw new AmortizationExceededException("Client not fount or DNI mismatch.");
         }
         Client client = optionalClient.get();
-
-        //mandamos un erro si en caso el dni no coincida con el idClient
-        if (client.getDni() != dni) {
-            return "the dni does not match the idClient";
-        }
 
         Double totalAmortization = repositoryAmortization.totalAmortizedByCustomer(idClient);
         if (totalAmortization == null) totalAmortization = 0.0;
 
         Double totalClient = client.getTotal();
-        if (totalAmortization + account > totalClient) {
-            return "no se puede amortizar mas.Ya alcanzo  o supero al total del Client";
+        Double newTotal = totalAmortization + account;
+
+        if (newTotal > totalClient) {
+            throw new AmortizationExceededException("Do not amortize more than the total customer already registered");
         }
+
         Amortization amortization = Amortization.builder()
                 .idClient(client)
                 .account(account)
@@ -50,30 +51,31 @@ public class AmortizationServiceImpl implements AmortizationService {
                 .build();
         repositoryAmortization.save(amortization);
 
-        Double newTotal = totalAmortization + account;
-        StringBuilder response = new StringBuilder();
-        if (newTotal >= totalClient) {
+        List<Amortization> list = repositoryAmortization.findByIdClientId(idClient);
+        List<AmortizationResponse.DetailAmortizationResponse> detalles = list.stream()
+                .map(a -> AmortizationResponse.DetailAmortizationResponse.builder()
+                        .account(a.getAccount())
+                        .payType(a.getPay())
+                        .date(a.getRegistrationAmortization())
+                        .build())
+                .toList();
+        String state;
+        Double remaining = totalClient - newTotal;
+        if(newTotal >= totalClient) {
             client.setSeparationType(StateSeparationType.CANCELED);
-            response.append("Su operation by idClient: ")
-                    .append(String.format("%s",idClient))
-                    .append("ha sido cancelado: Total amortizado: s/.")
-                    .append(String.format("%.2f",newTotal));
+            state = "CANCELED";
         }else {
             client.setSeparationType(StateSeparationType.AMORTIZANDOCE);
-            List<Amortization> list = repositoryAmortization.findByIdClientId(idClient);
-            response.append("Amortization registrada: Details:\n");
-
-            for (Amortization a : list) {
-                response.append("- Monto: s/.")
-                        .append(String.format("%.2f", a.getAccount()))
-                        .append(" | Metodo de pago: ").append(a.getPay())
-                        .append("| Fecha: ").append(a.getRegistrationAmortization()).append("\n");
-            }
-            Double restante = totalClient - newTotal;
-            response.append("Monto Restante para completar el pago: s/.")
-                    .append(String.format("%.2f", restante));
+            state = "AMORTIZANDOCE";
         }
         repositoryClient.save(client);
-        return response.toString();
+        return  AmortizationResponse.builder()
+                .idClient(idClient)
+                .stateOperation(state)
+                .totalAmortization(newTotal)
+                .totalAmortize(totalClient)
+                .remainingAmount(remaining)
+                .details(detalles)
+                .build();
     }
 }
