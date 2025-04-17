@@ -1,10 +1,9 @@
 package com.gestion.today.presentation.controller;
 
-import com.gestion.today.persistence.models.SlipperType;
+import com.gestion.today.persistence.models.num.SlipperType;
 import com.gestion.today.presentation.dto.SlipperDTO;
 import com.gestion.today.service.interfaces.CodTodayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

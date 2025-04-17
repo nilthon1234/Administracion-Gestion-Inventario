@@ -1,4 +1,4 @@
-package com.gestion.today.persistence.models;
+package com.gestion.today.persistence.models.num;
 
 public enum StateType {
 

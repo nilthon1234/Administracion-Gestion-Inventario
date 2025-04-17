@@ -1,5 +1,6 @@
 package com.gestion.today.persistence.models;
 
+import com.gestion.today.persistence.models.num.StateType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

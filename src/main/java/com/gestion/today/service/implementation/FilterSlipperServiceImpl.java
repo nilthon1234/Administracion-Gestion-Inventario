@@ -1,6 +1,7 @@
 package com.gestion.today.service.implementation;
 
 import com.gestion.today.persistence.models.*;
+import com.gestion.today.persistence.models.num.SlipperType;
 import com.gestion.today.persistence.repository.*;
 import com.gestion.today.presentation.dto.SlipperDTO;
 import com.gestion.today.service.interfaces.FilterSlipperService;

@@ -1,6 +1,6 @@
 package com.gestion.today.service.interfaces;
 
-import com.gestion.today.persistence.models.SlipperType;
+import com.gestion.today.persistence.models.num.SlipperType;
 import com.gestion.today.presentation.dto.SlipperDTO;
 import org.springframework.web.multipart.MultipartFile;
 
