@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AmortizationReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1056cab6-b446-4bd9-ab25-cac4b094199a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DetailsSeparation-JSON"/>
+	<queryString language="json">
+		<![CDATA[client.amortizations]]>
+	</queryString>
+	<field name="idClient" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="idClient"/>
+		<fieldDescription><![CDATA[idClient]]></fieldDescription>
+	</field>
+	<field name="account" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="account"/>
+		<fieldDescription><![CDATA[account]]></fieldDescription>
+	</field>
+	<field name="pay" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="pay"/>
+		<fieldDescription><![CDATA[pay]]></fieldDescription>
+	</field>
+	<field name="registrationAmortization" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="registrationAmortization"/>
+		<fieldDescription><![CDATA[registrationAmortization]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="-33" y="0" width="113" height="30" uuid="dff2382e-b7b7-4857-96b3-8b097ca15b24">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f601797b-a713-4aca-b569-ab2ebd37aa6c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="138" height="30" uuid="dff34dc4-1607-4208-b936-0f226909aa82">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a89bed8-c911-4a11-ad2f-ed529d544965"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amortizaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="0" width="138" height="30" uuid="6f16d097-ca71-4952-8436-2bc03cde2cf5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4af31fb3-d1e6-4552-8be0-4eeb0010535a"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Metodo De Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="0" width="166" height="30" uuid="1f545738-fbef-4a08-b62f-f609a3716001">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ad3413-2e1f-408f-918d-3b703f4dc5e8"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha De Amortizacion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="-33" y="0" width="113" height="30" uuid="c88b631e-7ed6-4173-b92b-eab210325f35">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f601797b-a713-4aca-b569-ab2ebd37aa6c"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{idClient}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="138" height="30" uuid="aedcea61-4b4b-434a-87d4-47fde74691b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a89bed8-c911-4a11-ad2f-ed529d544965"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="0" width="138" height="30" uuid="b848406b-ec6e-4677-a655-8e0f42a5ed0d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4af31fb3-d1e6-4552-8be0-4eeb0010535a"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="356" y="0" width="166" height="30" uuid="bca80abf-f01d-42e2-a852-fcb7bfd36417">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ad3413-2e1f-408f-918d-3b703f4dc5e8"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{registrationAmortization}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SeparationReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="201c9b91-7edb-4008-a6aa-4d92f2cdd264">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DetailsSeparation-JSON"/>
+	<queryString language="json">
+		<![CDATA[client.separations]]>
+	</queryString>
+	<field name="idClient" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="idClient"/>
+		<fieldDescription><![CDATA[idClient]]></fieldDescription>
+	</field>
+	<field name="codToday" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="codToday"/>
+		<fieldDescription><![CDATA[codToday]]></fieldDescription>
+	</field>
+	<field name="size" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="size"/>
+		<fieldDescription><![CDATA[size]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="amount"/>
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="price"/>
+		<fieldDescription><![CDATA[price]]></fieldDescription>
+	</field>
+	<field name="subTotal" class="java.lang.Double">
+		<property name="net.sf.jasperreports.json.field.expression" value="subTotal"/>
+		<fieldDescription><![CDATA[subTotal]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement x="-19" y="2" width="95" height="30" uuid="7c44def4-54b4-4bbf-b918-1758b192f306"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="2" width="92" height="30" uuid="fc14b850-2a83-4e4e-b760-7a161d1914e5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod Today]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="2" width="92" height="30" uuid="b3220a02-7fed-4fc5-aeed-0d2e259617b8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tallas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="2" width="91" height="30" uuid="9e9d5937-e80a-4752-bf5f-651b293f14d9"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="2" width="93" height="30" uuid="399f851b-9dd3-459a-936f-84bed0f2bb58"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="2" width="92" height="30" uuid="5737b525-c29e-4880-8bfe-14c009637766"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="-18" y="2" width="95" height="30" uuid="c1ca11c9-3b66-4885-bb80-333257459de5"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idClient}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="2" width="92" height="30" uuid="f4ce45c1-14b5-47ce-8628-53ea022ec693"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codToday}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="2" width="92" height="30" uuid="adc1ac6b-496c-4dab-8fd2-765088726573"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="2" width="92" height="30" uuid="3219f63a-405c-4df6-afc3-294582248b31"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="2" width="92" height="30" uuid="84014e4f-1319-41e3-956e-bd2ec6fa8313"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="2" width="92" height="30" uuid="2fc6a706-5715-4a94-ad53-edb2154de9c0"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

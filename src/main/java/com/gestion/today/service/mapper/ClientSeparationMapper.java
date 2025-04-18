@@ -12,8 +12,14 @@ public class ClientSeparationMapper {
     public static ClientSeparationResponse.ClientDto mapClient(Client client,
                                                                 List<Separation>separation,
                                                                 List<Amortization> amortization){
+
+        Double totalAmortizations = amortization.stream()
+                .mapToDouble(Amortization::getAccount)
+                .sum();
+
         return ClientSeparationResponse.ClientDto.builder()
                 .id(client.getId())
+                .totalAmortizations(totalAmortizations)
                 .name(client.getName())
                 .lastName(client.getLastName())
                 .dni(client.getDni())

@@ -1,6 +1,6 @@
 package com.gestion.today.service.http.response;
 
-import com.gestion.today.persistence.models.Client;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gestion.today.persistence.models.num.PayType;
 import com.gestion.today.persistence.models.num.StateSeparationType;
 import jakarta.persistence.*;
@@ -32,6 +32,7 @@ public class ClientSeparationResponse {
         private StateSeparationType separationType;
         private List<SeparationDto> separations;
         private List<AmortizationDto> amortizations;
+        private Double totalAmortizations;
     }
 
     @Data
@@ -55,7 +56,7 @@ public class ClientSeparationResponse {
         @Enumerated(EnumType.STRING)
         private PayType pay;
 
-        @Temporal(TemporalType.TIMESTAMP)
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Lima")
         private Date registrationAmortization;
     }
 

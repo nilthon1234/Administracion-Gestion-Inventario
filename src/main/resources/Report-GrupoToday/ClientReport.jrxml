@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ClientReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54015ef0-c59e-4ba2-a036-35adb87b6c89">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DetailsSeparation-JSON"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString language="json">
+		<![CDATA[client[0]]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="id"/>
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="name"/>
+		<fieldDescription><![CDATA[name]]></fieldDescription>
+	</field>
+	<field name="lastName" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="lastName"/>
+		<fieldDescription><![CDATA[lastName]]></fieldDescription>
+	</field>
+	<field name="dni" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.json.field.expression" value="dni"/>
+		<fieldDescription><![CDATA[dni]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="net.sf.jasperreports.json.field.expression" value="total"/>
+		<fieldDescription><![CDATA[total]]></fieldDescription>
+	</field>
+	<field name="separationType" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="separationType"/>
+		<fieldDescription><![CDATA[separationType]]></fieldDescription>
+	</field>
+	<field name="separations" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="separations"/>
+		<fieldDescription><![CDATA[separations]]></fieldDescription>
+	</field>
+	<field name="amortizations" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="amortizations"/>
+		<fieldDescription><![CDATA[amortizations]]></fieldDescription>
+	</field>
+	<field name="totalAmortizations" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="totalAmortizations"/>
+		<fieldDescription><![CDATA[totalAmortizations]]></fieldDescription>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="10" width="234" height="64" uuid="69d45b8a-7b05-4263-8c09-2dc58c6095ae"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEPARACION ZAPATILLA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="10" width="140" height="64" forecolor="#F2120F" uuid="8904b1a5-8a6d-4c57-8c1a-7622ab67d00f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA["GRUPOTODAY"]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="403" y="0" width="100" height="30" forecolor="#FA0F42" uuid="e9b1f870-9ac5-4504-8d76-369bfbbbfbaa"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="470" y="0" width="115" height="30" uuid="f17110a1-be1c-4a8a-91a9-28b0d4daa3ed"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="33" width="95" height="30" uuid="477b161a-7a9c-44d1-a8e6-455cfb428687">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be48c9f3-0036-4b3b-8a52-ca1088919e37"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="33" width="95" height="30" uuid="a6c09156-37f3-486d-b6ad-962d4f4124b2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97395e11-0e42-4e7e-9440-74c10dacffcd"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="403" y="33" width="92" height="30" uuid="1855cc06-a03e-4d7e-bd5d-192da39d43b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="882f1e6e-a4bd-4e44-8cca-14567b7370ba"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="33" width="92" height="30" uuid="a944e443-6358-4be6-9b30-bdbfbae6edb3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="882f1e6e-a4bd-4e44-8cca-14567b7370ba"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="-71" width="95" height="30" uuid="b07ec3c5-63b8-49d8-9394-ceecc2865ad8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11304260-a149-4e3c-8216-f57b8545e042"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="-38" width="92" height="30" uuid="ded0a7a4-9dfa-4b4d-8f4a-0576a165d3a7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be48c9f3-0036-4b3b-8a52-ca1088919e37"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="-38" width="92" height="30" uuid="86f73374-6b6b-4a0f-9582-c9eb271fe249">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97395e11-0e42-4e7e-9440-74c10dacffcd"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="-71" width="95" height="30" uuid="3e5dcae9-df5d-4c3f-8c26-12b8d9c2d4ec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11304260-a149-4e3c-8216-f57b8545e042"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="-9" y="3" width="200" height="77" uuid="4c4dc2e4-ed9c-4760-8dc9-a28c28a80f8d"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("separations")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SeparationReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="311" splitType="Stretch">
+			<subreport>
+				<reportElement x="-9" y="10" width="200" height="89" uuid="02ccc529-ea13-4091-be3f-466a711edb97"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("amortizations")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "AmortizationReport.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="170" y="240" width="215" height="70" uuid="ba8377b1-33b1-4438-8e6e-c3255500824c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08e852a8-1ad2-4fac-9a94-fef2a255a924"/>
+				</reportElement>
+				<textElement rotation="None" markup="styled">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEPARACION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="288" y="240" width="140" height="70" forecolor="#FC0C08" uuid="49c74726-319a-49b0-be63-1a475e21a0f4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08e852a8-1ad2-4fac-9a94-fef2a255a924"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{separationType}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="428" y="7" width="92" height="30" uuid="671f576a-a1d9-41d2-8c6a-bc7864517585">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a804685a-970a-4dd4-b8f4-e0d88cfcbfa5"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Pagar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="495" y="7" width="92" height="30" uuid="26bac273-1a28-40b8-8123-c1c24eb5f93d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a804685a-970a-4dd4-b8f4-e0d88cfcbfa5"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="7" width="100" height="30" uuid="01a121c3-d045-4a1f-9c5d-4ce39126c741"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalAmortizations}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="8" width="100" height="30" uuid="94e199f7-f1c0-4955-a58a-ea89d0679ec4"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Amortizado:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="549" height="1" uuid="3a387622-0231-46b5-ae6d-532f60e763ed"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>
