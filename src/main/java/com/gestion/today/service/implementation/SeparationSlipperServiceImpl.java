@@ -9,12 +9,16 @@ import com.gestion.today.persistence.repository.RepositoryAmortization;
 import com.gestion.today.persistence.repository.RepositoryClient;
 import com.gestion.today.persistence.repository.RepositorySeparation;
 import com.gestion.today.service.http.request.SeparationRequest;
+import com.gestion.today.service.http.response.ClientSeparationResponse;
+import com.gestion.today.service.http.response.TicketResponse;
 import com.gestion.today.service.interfaces.SeparationSlipperService;
+import com.gestion.today.service.mapper.ClientSeparationMapper;
 import com.gestion.today.utils.GenerateNroIdClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Transactional()
@@ -69,5 +73,17 @@ public class SeparationSlipperServiceImpl implements SeparationSlipperService {
                     .build();
             repositoryAmortization.save(amortization);
         }
+    }
+
+    @Override
+    public ClientSeparationResponse getClientSeparationById(String id) {
+        Client client = repositoryClient.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        List<Separation> separation = repositorySeparation.findByIdClient_Id(id);
+        List<Amortization> amortization = repositoryAmortization.findByIdClientId(id);
+
+        return ClientSeparationResponse.builder()
+                .client(List.of(ClientSeparationMapper.mapClient(client,separation,amortization)))
+                .build();
     }
 }

@@ -1,13 +1,12 @@
 package com.gestion.today.presentation.controller;
 
+import com.gestion.today.persistence.models.Separation;
 import com.gestion.today.service.http.request.SeparationRequest;
+import com.gestion.today.service.http.response.ClientSeparationResponse;
 import com.gestion.today.service.interfaces.SeparationSlipperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/separation")
 @RestController
@@ -24,6 +23,16 @@ public class SeparationController {
 
         } catch (Exception e) {
             return ResponseEntity.status(500).body("ERROR AL GUARDAR SEPARATION: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientSeparationResponse> getClientSeparationList(@PathVariable("id") String id){
+        try {
+            ClientSeparationResponse response = separationSlipperService.getClientSeparationById(id);
+            return ResponseEntity.ok(response);
+        }catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
         }
     }
 
