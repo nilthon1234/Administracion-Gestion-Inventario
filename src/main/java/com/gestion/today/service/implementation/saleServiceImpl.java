@@ -74,7 +74,7 @@ public class saleServiceImpl implements SaleTicketService {
     @Override
     public TicketResponse getTicketByNro(Integer nroTicket) {
         Ticket ticket = repositoryTicket.findById(nroTicket)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new RuntimeException("Number Ticket not found"));
         List<DetailTicket> detail = repositoryDetailsTicket.findByTicket_NroTicket(nroTicket);
 
 

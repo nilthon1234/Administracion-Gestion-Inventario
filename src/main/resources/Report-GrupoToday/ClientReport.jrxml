@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DetailsSeparation-JSON"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<queryString language="json">
-		<![CDATA[client[0]]]>
+		<![CDATA[client]]>
 	</queryString>
 	<field name="id" class="java.lang.String">
 		<property name="net.sf.jasperreports.json.field.expression" value="id"/>
@@ -158,10 +158,10 @@
 			<subreport>
 				<reportElement x="-9" y="10" width="200" height="89" uuid="02ccc529-ea13-4091-be3f-466a711edb97"/>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("amortizations")]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "AmortizationReport.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[ $P{SUBREPORT_DIR} + "AmortizationReport.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="170" y="240" width="215" height="70" uuid="ba8377b1-33b1-4438-8e6e-c3255500824c">
+				<reportElement x="144" y="240" width="215" height="70" uuid="ba8377b1-33b1-4438-8e6e-c3255500824c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08e852a8-1ad2-4fac-9a94-fef2a255a924"/>
 				</reportElement>
 				<textElement rotation="None" markup="styled">
@@ -170,7 +170,7 @@
 				<text><![CDATA[SEPARACION:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="288" y="240" width="140" height="70" forecolor="#FC0C08" uuid="49c74726-319a-49b0-be63-1a475e21a0f4">
+				<reportElement x="260" y="240" width="162" height="70" forecolor="#FC0C08" uuid="49c74726-319a-49b0-be63-1a475e21a0f4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08e852a8-1ad2-4fac-9a94-fef2a255a924"/>
 				</reportElement>
 				<textElement>

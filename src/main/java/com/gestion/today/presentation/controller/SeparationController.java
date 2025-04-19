@@ -11,6 +11,8 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+
 @RequestMapping("/separation")
 @RestController
 @RequiredArgsConstructor
@@ -49,14 +51,13 @@ public class SeparationController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDisposition(ContentDisposition.builder("attachment")
-                    .filename("client-report-" + id + ".pdf")
+                    .filename( id + "_client" + ".pdf")
                     .build());
 
             return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
+                    .body(e.getMessage().getBytes(StandardCharsets.UTF_8));
         }
     }
 

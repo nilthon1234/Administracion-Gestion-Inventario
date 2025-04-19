@@ -78,7 +78,7 @@ public class SeparationSlipperServiceImpl implements SeparationSlipperService {
     @Override
     public ClientSeparationResponse getClientSeparationById(String id) {
         Client client = repositoryClient.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new RuntimeException("El Id Cliente no existe"));
         List<Separation> separation = repositorySeparation.findByIdClient_Id(id);
         List<Amortization> amortization = repositoryAmortization.findByIdClientId(id);
 
