@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QrCodesReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c18ace31-011d-450b-a925-3c6856cad9f1">
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="GenerationDate" class="java.util.Date"/>
+	<field name="tableName" class="java.lang.String"/>
+	<field name="brand" class="java.lang.String"/>
+	<field name="codToday" class="java.lang.String"/>
+	<field name="company" class="java.lang.String"/>
+	<field name="qrImageData" class="java.lang.Object"/>
+	<title>
+		<band height="50">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" uuid="6e88df5c-114d-4afc-8b9b-7a73c94c26b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="30" width="555" height="20" uuid="67f9e793-de2c-49a4-ab9d-a6b1b4b1de58"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{GenerationDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="180" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="555" height="180" uuid="f933718f-ea0b-4f5d-833e-0881a84686de"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream((byte[])$F{qrImageData})]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="30" uuid="99e849bf-fd79-4b0e-9811-c6355ed03368"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
